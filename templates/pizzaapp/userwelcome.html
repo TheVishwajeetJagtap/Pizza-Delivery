@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand">welcome {{username}}</a>
+      <a class="nav-item" style="color: black;text-decoration: none" href="/userorders/">My Orders</a>
+      <form class="form-inline" method="post" action="/userlogout/">
+        {% csrf_token %}
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+      </form>
+    </nav>
+{% for message in messages %}
+<p style = "color:green">{{message}}</p>
+</style>
+{% endfor %}
+<form class="" action="/placeorder/" method="post">
+  {% csrf_token %}
+    <div class="container">
+        <div class="row col-md-6 col-md-offset-2 custyle">
+        <table class="table table-striped custab">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Pizza Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th class="text-center">Quantity</th>
+            </tr>
+        </thead>
+        {% for p in pizzas%}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ p.pizzaname }}</td>
+          <td>{{ p.desc }}</td>
+          <td>{{ p.price }}</td>
+          <td><input type="number" min="0" value="0" name="{{p.id}}" style="width: 60px" name="quantity"></td>
+        </tr>
+        {% endfor %}
+        </table>
+        </div>
+        <input type="text" placeholder="address" style="width: 400px;" name="address">
+        <input type="submit" style="float: right;" class="btn btn-primary btn-xs" value="+ Place Order" name="">
+        <!-- <a href="/addpizza/" class="btn btn-primary btn-xs pull-left "><b>+</b> Place Order</a> -->
+    </div>
+</form>
+  </body>
+</html>

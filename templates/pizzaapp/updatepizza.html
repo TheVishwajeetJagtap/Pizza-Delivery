@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<nav class="navbar navbar-light bg-light" >
+  <a class="navbar-brand">Admin Dashboard</a>
+  <form class="form-inline" method="post" action="/adminlogout/">
+    {% csrf_token %}
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+  </form>
+</nav>
+
+<form class="add-form" action="/updatepizza/{{obj.id}}/" method="POST">
+  <div class="container" style="width: 700px;display: block;margin: auto;margin-top: 50px;">
+      <caption>
+        <h1>Update Pizza</h1>
+      </caption>
+      {% csrf_token %}
+      {{pizzaform | crispy}}
+      <br />
+      <button class="btn btn-primary" type="submit">Update</button>
+    </form>
+  </div>
+{% endblock %}

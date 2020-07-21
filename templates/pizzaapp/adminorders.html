@@ -1,0 +1,27 @@
+{% extends 'base.html '%}
+{% block content %}
+
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand">welcome {{username}}</a>
+  <a class="nav-item" style="color: black;text-decoration: none" href="/admin/adminhomepage/">Home</a>
+  <form class="form-inline" method="post" action="/adminlogout/">
+    {% csrf_token %}
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+  </form>
+</nav>
+
+<h1 style="text-align:center">All Orders</h1>
+{% for order in orders %}
+<div style="margin: 40px" class="alert alert-warning" role = "alert">
+	<p style="text-align: center;">{{order.username}}</p>
+	<p style="text-align: center;">{{order.phoneno}}</p>
+	<p style="text-align: center;">{{order.address}}</p>
+	<p style="text-align: center;">{{order.ordereditems}}</p>
+	<p style="text-align: center;">order status : {{order.orders_status}}</p>
+	<div class="container" style="width: 200px;margin: auto">
+		<a href="/acceptorder/{{order.id}}/" style="display: inline;" class="btn btn-success">accept</a>
+	<a href="/declineorder/{{order.id}}/" style="display: inline" class="btn btn-danger">decline</a>
+	</div>
+</div>
+{% endfor %}
+{% endblock %}

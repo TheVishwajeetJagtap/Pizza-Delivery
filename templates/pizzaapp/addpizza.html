@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand">Admin Dashboard</a>
+  <form class="form-inline" method="post" action="/adminlogout/">
+    {% csrf_token %}
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+  </form>
+</nav>
+
+<form method="post" action="/addpizza/" >
+  {% csrf_token %}
+
+	<div class="container" style="width: 700px;display: block;margin: auto;margin-top: 50px;">
+		<input type="text" placeholder="Pizza Name" class="form-control" name="pizzaname" style="width: 200px;display: inline;margin: auto">
+		<input type="text" class="form-control" placeholder="Description" name="desc" style="width: 200px;display: inline;margin: auto">
+    <input type="text" class="form-control" placeholder="Price" name="price" style="width: 200px;display: inline;margin: auto">
+    <button class="btn btn-primary" type="submit">Add</button>
+
+      <!-- {{pizzaform | crispy}}
+      <button class="btn btn-primary" type="submit">Add</button> -->
+	</div>
+</form>
+
+{% endblock %}

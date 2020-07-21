@@ -1,0 +1,72 @@
+{%extends 'base.html'%}
+{% block content %}
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand">Admin Dashboard</a>
+  <a class="nav-item" style="color: black;text-decoration: none" href="/adminorders/">All Orders</a>
+  <form class="form-inline" method="post" action="/adminlogout/">
+    {% csrf_token %}
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+  </form>
+</nav>
+
+<!-- <form method="post" action="/addpizza/" >
+  {% csrf_token %}
+	<div class="container" style="width: 700px;display: block;margin: auto;margin-top: 50px;">
+		<input type="text" placeholder="Pizza Name" class="form-control" name="pizzaname" style="width: 200px;display: inline;margin: auto">
+		<input type="text" class="form-control" placeholder="Description" name="desc" style="width: 200px;display: inline;margin: auto">
+    <input type="text" class="form-control" placeholder="Price" name="price" style="width: 200px;display: inline;margin: auto">
+	<input style="display: inline" type="submit" value="add" name="" class="btn btn-success">
+	</div>
+</form> -->
+
+<!-- <div class="container" style="width: 50%;display: block;margin: auto;margin-top: 80px">
+	<table style="width: 50%">
+	<tr>
+		<th>Pizza Name</th>
+    <th>Description</th>
+		<th>Price</th>
+	</tr>
+	{% for p in pizza%}
+	<tr>
+		<td>{{p.pizzaname}}</td>
+		<td>{{p.desc}}</td>
+		<td>{{p.price}}</td>
+	</tr>
+	{% endfor %}
+</table>
+</div> -->
+
+
+<div class="container">
+    <div class="row col-md-6 col-md-offset-2 custyle">
+    <table class="table table-striped custab">
+    <thead>
+    <a href="/addpizza/" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new pizza</a>
+        <tr>
+            <th>ID</th>
+            <th>Pizza Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+    {% for p in pizza%}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ p.pizzaname }}</td>
+      <td>{{ p.desc }}</td>
+      <td>{{ p.price }}</td>
+      <td class="text-center"><a class='btn btn-info btn-xs' href="/updatepizza/{{p.id}}"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="/deletepizza/{{p.id}}/" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+    </tr>
+    {% endfor %}
+    </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!--<form method="post" action="/authenticateadmin/">
+  {% csrf_token %}
+  <input type="text" name="username" value="">
+  <input type="password" name="password" value="">
+  <input type="submit" name="login" value="login">
+</form>-->
+
+<link rel="stylesheet" href="{% static "css/adminloginpage.css"%}">
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <h2 class="active"> Admin Sign In </h2>
+
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="https://image.flaticon.com/icons/png/128/2722/2722134.png"  />
+    </div>
+
+    <!-- Login Form -->
+    <form method="post" action="/authenticateadmin/">
+      {% csrf_token %}
+      <input type="text"  class="fadeIn second" name="username" placeholder="Username">
+      <input type="text"  class="fadeIn third" name="password" placeholder="Password">
+      <input type="submit" class="fadeIn fourth" value="Log In">
+    </form>
+
+    <!-- Error Messages -->
+    {% for message in messages %}
+    <p style = "text-aling:center; color:red" >{{message}}</p>
+    {% endfor %}
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" href="/adminforgetpassword/">Forgot Password?</a>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
